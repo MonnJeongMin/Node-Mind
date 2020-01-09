@@ -16,6 +16,10 @@
 * dir : 
 * `app.use("/", func)`
 
+## static
+* dir : 
+* 정적파일 보관 장소
+
 ### Express
 * app.set
     * server setting
