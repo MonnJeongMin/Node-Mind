@@ -32,4 +32,8 @@ io.on("connection", socket => {
   socket.on("newMessage", message => {
     socket.broadcast.emit("messageNotifi", { message })
   });
+  // Set nickname //
+  socket.on("setNickname", ({ nickname }) => {
+    socket.nickname = nickname;
+  });
 });
