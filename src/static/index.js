@@ -14,8 +14,8 @@ function setNickname(nickname) {
 
 // recevied new message event func
 function handleMessageNotifi(data) {
-  const { message } = data;
-  console.log(`Somebody : ${message}`);
+  const { message, nickname } = data;
+  console.log(`${nickname} : ${message}`);
 }
 
 socket.on("messageNotifi", handleMessageNotifi);

@@ -30,7 +30,10 @@ const io = socketIO.listen(server);
 io.on("connection", socket => {
   // chat event handler //
   socket.on("newMessage", message => {
-    socket.broadcast.emit("messageNotifi", { message })
+    socket.broadcast.emit("messageNotifi", {
+      message,
+      nickname: socket.nickname || "Anon"
+    });
   });
   // Set nickname //
   socket.on("setNickname", ({ nickname }) => {
