@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:server": "nodemon --exec babel-node src/server"
+    "dev:server": "nodemon --exec babel-node src/server",
+    "build:styles": "gulp styles"
   },
   "author": "Talic",
   "license": "ISC",
@@ -15,10 +16,14 @@
     "@babel/preset-env": "^7.7.7",
     "eslint": "^6.8.0",
     "express": "^4.17.1",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.0.2",
     "morgan": "^1.9.1",
+    "node-sass": "^4.13.0",
     "nodemon": "^2.0.2",
     "pug": "^2.0.4",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "yarn": "^1.21.1"
   },
   "devDependencies": {
     "eslint-config-prettier": "^6.9.0",
