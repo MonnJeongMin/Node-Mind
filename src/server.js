@@ -2,6 +2,8 @@ import { join } from "path";
 import express from "express";
 import socketIO from "socket.io";
 import logger from "morgan";
+import socketController from "./socketController";
+import events from "./events";
 
 //Setting
 const PORT = 4000;
@@ -15,7 +17,9 @@ app.use(logger("dev"));
 app.use(express.static(join(__dirname, "static")));
 
 //routing
-app.get("/", (req, res) => res.render("home"));
+app.get("/", (req, res) =>
+  res.render("home", { events: JSON.stringify(events) })
+);
 
 //Server start action
 const handleListening = () =>
@@ -27,16 +31,4 @@ const io = socketIO.listen(server);
 
 //Event emmiter 이벤트를 만드는 것. 연결을 하기 위한 이벤트를 만들어진 것
 // on이 만드는 것, emit은 사용하는 것
-io.on("connection", socket => {
-  // chat event handler //
-  socket.on("newMessage", message => {
-    socket.broadcast.emit("messageNotifi", {
-      message,
-      nickname: socket.nickname || "Anon"
-    });
-  });
-  // Set nickname //
-  socket.on("setNickname", ({ nickname }) => {
-    socket.nickname = nickname;
-  });
-});
+io.on("connection", socket => socketController(socket));
