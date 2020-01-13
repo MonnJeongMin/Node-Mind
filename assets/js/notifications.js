@@ -1,7 +1,14 @@
-const notification = document.getElementById("jsNotifications");
+const notifications = document.getElementById("jsNotifications");
 
-export const handleNewUser = ({ nickname }) => {
-  console.log(nickname, " just joined");
+const fireNotification = (text, color) => {
+  const notification = document.createElement("div");
+  notification.innerHTML = text;
+  notification.style.backgroundColor = color;
+  notifications.appendChild(notification);
 };
 
-//window.socket.on(window.events.newUser, handleNewUser);
+export const handleNewUser = ({ nickname }) =>
+  fireNotification(`✔  New User joined (${nickname})`, "blue");
+
+export const handleDisconnected = ({ nickname }) =>
+  fireNotification(`🤦‍♂️ User Disconnected (${nickname})`,     "orange");
