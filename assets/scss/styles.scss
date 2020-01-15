@@ -4,6 +4,7 @@
 @import "login";
 @import "notifications";
 @import "chat";
+@import "game";
   
   button:focus {
     outline: none;
@@ -32,7 +33,7 @@
     }
     &.loggedIn {
       .gameContainer {
-        display: block;
+        display: flex;
       }
     }
   }
