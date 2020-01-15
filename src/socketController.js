@@ -25,6 +25,10 @@ const socketController = socket => {
     broadcast(events.strokedPath, { x, y, color });
     console.log(x, y);
     });
+
+  socket.on(events.fill, ({ color }) => {
+    broadcast(events.filled, {color});
+  });
 };
 
 export default socketController;
