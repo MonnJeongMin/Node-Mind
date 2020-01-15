@@ -31,4 +31,4 @@ const io = socketIO.listen(server);
 
 //Event emmiter 이벤트를 만드는 것. 연결을 하기 위한 이벤트를 만들어진 것
 // on이 만드는 것, emit은 사용하는 것
-io.on("connection", socket => socketController(socket));
+io.on("connection", socket => socketController(socket, io));
