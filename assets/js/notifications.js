@@ -4,6 +4,7 @@ const fireNotification = (text, color) => {
   const notification = document.createElement("div");
   notification.innerHTML = text;
   notification.style.backgroundColor = color;
+  notification.className = "notification";
   body.appendChild(notification);
 };
 
