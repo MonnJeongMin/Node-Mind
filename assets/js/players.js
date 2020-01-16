@@ -2,7 +2,8 @@ import {
   disableCanvas,
   hideControls,
   enableCanvas,
-  showControls
+  showControls,
+  resetCanvas
 } from "./paint";
 
 const board = document.getElementById("jsPBoard");
@@ -31,4 +32,12 @@ export const handleLeaderNotif = ({ word }) => {
   showControls();
   notifs.innerHTML = "";
   notifs.innerHTML = `😊You are the leader, 🐱‍👓paint: ${word}`;
+};
+
+export const handleGameEnded = () => {
+  notifs.innerHTML = "";
+  notifs.innerHTML = `🤦‍♂️ Game Ended!`;
+  disableCanvas();
+  hideControls();
+  resetCanvas();
 };

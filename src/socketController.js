@@ -5,6 +5,7 @@ import { chooseWord } from "./words";
 let sockets = [];
 let inProgress = false;
 let word = null;
+let leader = null;
 
 const chooseLeader = () => sockets[Math.floor(Math.random() * sockets.length)];
 
@@ -19,7 +20,7 @@ const socketController = (socket, io) => {
   const startGame = () => {
     if (inProgress === false) {
       inProgress = true;
-      const leader = chooseLeader();
+      leader = chooseLeader();
       word = chooseWord();
       setTimeout(() => {
         superBroadcast(events.gameStarted);
@@ -30,6 +31,7 @@ const socketController = (socket, io) => {
 
   const endGame = () => {
     inProgress = false;
+    superBroadcast(events.gameEnded);
   };
 
   socket.on(events.setNickname, ({ nickname }) => {
@@ -47,6 +49,8 @@ const socketController = (socket, io) => {
     sockets = sockets.filter(aSocket => aSocket.id !== socket.id);
     if (sockets.length === 1) {
       endGame();
+    } else if (leader && socket.id === leader.id){
+      endGame();
     }
     broadcast(events.disconnected, { nickname: socket.nickname });
     sendPlayerUpdate();
@@ -62,7 +66,6 @@ const socketController = (socket, io) => {
 
   socket.on(events.strokePath, ({ x, y, color }) => {
     broadcast(events.strokedPath, { x, y, color });
-    console.log(x, y);
   });
 
   socket.on(events.fill, ({ color }) => {
